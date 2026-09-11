@@ -1,0 +1,11 @@
+# Complete this file before writing the lifecycle skills.
+group: TODO
+track: TODO # SDLC, DDLC, KDLC, or PDLC
+context_repository: TODO # Local path to the assigned Portwell track repository
+process: TODO
+work_item: TODO
+
+constraints:
+  track_repository_access: read-only
+  heldout_course_material: prohibited
+
