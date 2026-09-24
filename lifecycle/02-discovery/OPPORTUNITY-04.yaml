@@ -1,0 +1,315 @@
+# lifecycle/02-discovery/OPPORTUNITY-04.yaml
+# Produced by the worked case of 2026-09-24. Skills ran in the order of states/02-discovery/definition.yaml.
+# Every value comes from a document in portwell-product, cited in sources. Nothing was estimated.
+
+item: OPPORTUNITY-04
+type: feature                     # proposed by route. Confirmed only when G2 is signed.
+stage: 02-discovery
+status: escalated                 # most severe open episode, per states/statuses.yaml precedence
+status_since: "2026-08-12"
+owner: {role: product lead, person: Ana Fialho}
+entered: "2026-06-18"             # the brief is the first discovery artifact. Legacy entry, G1 not on record.
+entered_from: 01-backlog
+exited: null
+exited_to: null
+links:
+  parent: unknown                 # the help portal pilot has no item ID in data/product-tracker.xlsx
+  spawned_by: null
+  supersedes: null
+  superseded_by: null
+refs: [EXPERIMENT-02, DECISION-0028, DECISION-0031, REQUEST-G01, REQUEST-R01, REQUEST-T01, REQUEST-A01, BLOCKER-01, LAUNCH-01, ADOPT-01, INCIDENT-01, INCIDENT-02, POLICY-01, POLICY-03, POLICY-08, POLICY-10, POLICY-11]
+
+sources:
+  - {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}
+  - {path: data/discovery/portal-expansion-design.docx, author: "Ana Fialho, with Kofi Adjei", dated: "2026-07-09", revised: unknown, note: Status Draft. Circulated 9 July, no comments received.}
+  - {path: data/experiments/EXPERIMENT-02-design-and-result.docx, author: Ana Fialho, dated: "2026-05-28", revised: "2026-07-21", note: "Registered 2026-05-28, ran 2026-06-01 to 2026-07-15, last edited 2026-07-21"}
+  - {path: data/experiments/EXPERIMENT-02-results.xlsx, author: Ana Fialho, dated: "2026-07-18", revised: unknown, note: compiled 2026-07-18. Median row empty.}
+  - {path: data/decisions/DECISION-0028-pilot-scope-change.docx, author: Ana Fialho, dated: "2026-08-07", revised: unknown}
+  - {path: data/decisions/DECISION-0031-cycle-count-module-deprecation.docx, author: Ana Fialho, dated: "2026-07-22", revised: unknown, note: used as the form of a complete DECISION record}
+  - {path: docs/Policies.docx, author: Ana Fialho, dated: unknown, revised: "2026-06-02", note: last reviewed 2026-06-02}
+  - {path: docs/How we work today.docx, author: Ana Fialho, dated: "2025-11-04", revised: never}
+  - {path: docs/Dependencies.docx, author: Ana Fialho, dated: "2026-05-14", revised: unknown}
+  - {path: docs/incidents/INCIDENT-01 superseded refund window.docx, author: unknown, dated: "2026-07-14", revised: unknown, note: "written three days after the fact, by whoever was on call"}
+  - {path: docs/incidents/INCIDENT-02 retry advice stopped a feed.docx, author: unknown, dated: "2026-07-29", revised: unknown, note: written by the solution consultant who took the escalation. Occurrence date not stated.}
+  - {path: docs/incidents/Pilot incidents, product view.docx, author: Ana Fialho, dated: "2026-08-04", revised: unknown}
+  - {path: docs/interviews/2026-08-12 Ana Fialho, how decisions happen.docx, author: Mei Tan, dated: "2026-08-12", revised: n/a}
+  - {path: docs/interviews/2026-08-19 Rui Bastos, what the pilot showed.docx, author: Mei Tan, dated: "2026-08-19", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-05-gabriela-rocha.docx, author: Gabriela Rocha, dated: "2026-08-05", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-08-rui-bastos.docx, author: Rui Bastos, dated: "2026-08-08", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-11-tomas-silva.docx, author: Tomas Silva, dated: "2026-08-11", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-13-ana-fialho.docx, author: Ana Fialho, dated: "2026-08-13", revised: n/a}
+  - {path: data/product-tracker.xlsx, author: Ana Fialho, dated: unknown, revised: unknown, note: updated when someone remembers}
+  - {path: data/launch/launch-readiness-checklist.xlsx, author: Ana Fialho, dated: unknown, revised: "2026-08-26"}
+  - {path: data/launch/adoption-measures-draft.xlsx, author: Ana Fialho, dated: unknown, revised: unknown, note: status draft, not agreed}
+  - {path: data/people/headcount.xlsx, author: unknown, dated: unknown, revised: unknown, note: roles and reporting lines}
+
+unknowns:
+  - {fact: the EXPERIMENT-02 thresholds as registered on 2026-05-28, needed_for: "verification check 3, contradiction C1, G2", asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: G1 signature, needed_for: entry_ticket, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: whether the 28 accounts of DECISION-0028 are enabled today, needed_for: route_note.deterministic_checks and scope, asked_to: Kofi Adjei, asked_on: "2026-09-24"}
+  - {fact: the list of the 16 additional accounts and their regions, needed_for: "POLICY-03 scope, waves", asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: source of the 112 minute Nordkai baseline in REQUEST-G01, needed_for: contradiction C3, asked_to: Gabriela Rocha, asked_on: "2026-09-24"}
+  - {fact: occurrence date of INCIDENT-02, needed_for: validity pass, asked_to: null, asked_on: null}
+  - {fact: the review capacity number support can absorb, needed_for: "G2 consent of Rui Bastos, wave go criteria", asked_to: Rui Bastos, asked_on: "2026-09-24"}
+  - {fact: engineering estimate in writing, needed_for: G2 consent of Kofi Adjei, asked_to: Kofi Adjei, asked_on: "2026-09-24"}
+  - {fact: escalation target for a blocked consent, needed_for: status_log episodes 2 and 3, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: item ID of the parent pilot, needed_for: links.parent, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: review date for the decision, needed_for: decision_draft.review_date, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: who ticked checklist row 2 and when, needed_for: contradiction C4, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+
+contradictions:
+  - fact: EXPERIMENT-02 outcome against its criteria
+    a: {source: "EXPERIMENT-02-design-and-result.docx, last edited 2026-07-21", says: "Both criteria met. Median first response 72 minutes and median self-service 36.9 per cent."}
+    b: {source: "Ana Fialho interview, 2026-08-12", says: "It beat one measure and missed the other. It was adjusted. The document says the current threshold. It does not say it used to say something else."}
+    depends: G2
+    resolved_by: null
+  - fact: pilot performance figures
+    a: {source: "OPPORTUNITY-04 brief, 2026-06-18", says: "Median first response 22 minutes against a baseline of 94. Self-service 58 per cent. No metric version."}
+    b: {source: "EXPERIMENT-02, six accounts, 2026-06-01 to 2026-07-15", says: "First response p50 72 minutes. Self-service 36.9 per cent."}
+    depends: G2
+    resolved_by: null
+  - fact: Nordkai baseline
+    a: {source: "REQUEST-G01, 2026-08-05", says: "Nordkai went from a 112 minute median to 51."}
+    b: {source: "EXPERIMENT-02-results.xlsx, 2026-07-18", says: "Nordkai first response p50 51. No baseline column. No document records 112."}
+    depends: none
+    resolved_by: null
+  - fact: support review capacity confirmed
+    a: {source: "launch-readiness-checklist.xlsx, row 2, last updated 2026-08-26", says: "Support review capacity confirmed. Owner Rui Bastos. Done Yes. Evidence empty."}
+    b: {source: "REQUEST-R01, 2026-08-08, and Rui Bastos interview, 2026-08-19", says: "Please do not widen the pilot until the share of suggestions needing human review is coming down. I object to expanding before the review queue is solved."}
+    depends: G3
+    resolved_by: null
+  - fact: number of decision records
+    a: {source: "Ana Fialho interview, 2026-08-12", says: "There is a folder of decision records. It has four things in it."}
+    b: {source: "data/decisions/", says: "Two files. DECISION-0028 and DECISION-0031."}
+    depends: none
+    resolved_by: null
+  - fact: scope of POLICY-03
+    a: {source: "docs/Policies.docx, POLICY-03", says: "Customer data leaving the EU region requires a documented transfer basis."}
+    b: {source: "REQUEST-T01, 2026-08-11", says: "POLICY-03 requires a documented transfer basis where customer data is processed outside the region it originates in. For the LATAM accounts I cannot sign off."}
+    depends: G2
+    resolved_by: null
+  - fact: billing answers reach a human
+    a: {source: "portal-expansion-design.docx, 2026-07-09", says: "Billing topics route to a human for Business and Enterprise accounts."}
+    b: {source: "INCIDENT-01, 2026-07-14", says: "A billing question was answered and the suggestion was sent without a human reading it. Account tier not recorded."}
+    depends: none
+    resolved_by: null
+  - fact: who must agree to a pilot expansion
+    a: {source: "How we work today.docx, 2025-11-04, and Ana Fialho interview, 2026-08-12", says: "Support agrees where it lands on their team. Legal agrees where there is a data protection angle. Me, and Rui, and Tomas."}
+    b: {source: "DECISION-0028, 2026-08-07", says: "Approver: Ana Fialho. No other signature."}
+    depends: G2
+    resolved_by: null
+
+controls_missing:
+  - {check: a brief cited as evidence must carry a review_by date and be checked against incidents written after it, would_protect: the staleness of OPPORTUNITY-04 when DECISION-0028 cited it}
+  - {check: experiment thresholds are stored immutably at registration, would_protect: the registered values of EXPERIMENT-02}
+  - {check: account count against POLICY-08 runs on every scope change by counting, would_protect: the 25 account gate DECISION-0028 crossed as a scope change}
+  - {check: a policy citation is refused when the policy is superseded on the citation date, would_protect: checklist row 6 against POLICY-10}
+  - {check: a consent cannot be recorded as given without a dated written response from that person, would_protect: checklist row 2 against Rui Bastos's written objection}
+  - {check: a blocked episode must name an escalation target, would_protect: BLOCKER-01, open since 2026-07-11 with no next step}
+  - {check: a gate deadline that passes unsigned changes the item's status, would_protect: REQUEST-A01, overdue since 2026-08-31}
+
+status_log:
+  - n: 1
+    status: open
+    since: "2026-06-18"
+    until: null
+    reason: "legacy entry. The brief of 2026-06-18 is the first discovery artifact. Tracker Opened 2026-06-18. No G1 record. Ratification of the entry asked of Ana Fialho on 2026-09-24."
+    waiting_on: Ana Fialho
+    owner: Ana Fialho
+    asks: ["2026-09-24"]
+    limit: 3
+    escalate_to: not named
+    return_to: 02-discovery open
+  - n: 2
+    status: blocked
+    since: "2026-07-11"
+    until: "2026-08-12"
+    reason: "POLICY-03 sign-off for LATAM accounts not given. BLOCKER-01 in the tracker, owner field empty. REQUEST-T01 of 2026-08-11 states the position in writing."
+    waiting_on: Tomas Silva
+    owner: Ana Fialho
+    asks: [unknown, unknown, unknown]
+    asks_evidence: "Ana Fialho, 2026-08-12: Three, so far. Tracker, last touched 2026-08-22: Asked three times. Dates of the asks are not recorded."
+    limit: 3
+    escalate_to: not named
+    return_to: 02-discovery open
+  - n: 3
+    status: escalated
+    since: "2026-08-12"
+    until: null
+    reason: "episode 2 reached the ask limit on the record of 2026-08-12. No escalation target exists. Ana Fialho, 2026-08-12: the person I would escalate to is the person waiting."
+    waiting_on: not named
+    owner: Ana Fialho
+    asks: []
+    limit: null
+    escalate_to: not named
+    return_to: 02-discovery open
+  - n: 4
+    status: blocked
+    since: "2026-09-01"
+    until: null
+    reason: "G2 deadline 2026-08-31 passed with signature null. Deadline source REQUEST-A01. Tracker note: Now overdue."
+    waiting_on: Ana Fialho
+    owner: Ana Fialho
+    asks: ["2026-09-24"]
+    limit: 3
+    escalate_to: not named
+    return_to: 02-discovery open
+  - n: 5
+    status: correction-required
+    since: "2026-09-24"
+    until: null
+    reason: "verification failed. Check 3 cannot verify, registered thresholds unknown. Check 4 failed, POLICY-10 cited in the evidence chain after supersession. Raised by the harness run."
+    waiting_on: Ana Fialho
+    owner: Ana Fialho
+    asks: ["2026-09-24"]
+    limit: 3
+    escalate_to: not named
+    return_to: 02-discovery open
+
+entry_ticket:                     # written by intake
+  g1_signed_on: unknown           # not on record
+  g2_deadline: "2026-08-31"
+  g2_deadline_source: "REQUEST-A01, 2026-08-13: We need a decision on expansion before the end of August"
+  scope_from_g1: unknown          # the brief's own recommendation stands in. "Proceed to a launch readiness assessment with a target of 40 accounts."
+
+evidence_manifest:                # written by context
+  - {id: F1, fact: pilot account count at the time of the brief, value: "12 accounts, six weeks", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F2, fact: suggestions offered, value: "71 per cent of offered tickets", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: unknown, verbal: null, invalidated_by: "INCIDENT-01, written 2026-07-14", validity: invalidated, reaffirmed_by: null}
+  - {id: F3, fact: suggestions sent without material edit, value: "58 per cent", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: unknown, verbal: null, invalidated_by: "INCIDENT-01, written 2026-07-14", validity: invalidated, reaffirmed_by: null}
+  - {id: F4, fact: median first response, value: "22 minutes against a baseline of 94", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: unknown, verbal: null, invalidated_by: "INCIDENT-01, written 2026-07-14", validity: invalidated, reaffirmed_by: null}
+  - {id: F5, fact: self-service across pilot accounts, value: "58 per cent", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: unknown, verbal: null, invalidated_by: "INCIDENT-01, written 2026-07-14", validity: invalidated, reaffirmed_by: null}
+  - {id: F6, fact: brief recommendation, value: "Proceed to a launch readiness assessment with a target of 40 accounts", source: {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F7, fact: EXPERIMENT-02 design, value: "Six accounts, six weeks, 2026-06-01 to 2026-07-15. Registered 2026-05-28.", source: {path: data/experiments/EXPERIMENT-02-design-and-result.docx, author: Ana Fialho, dated: "2026-05-28", revised: "2026-07-21"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F8, fact: EXPERIMENT-02 thresholds as the document shows them, value: "First response p50 under 75 minutes. Self-service at or above 35 per cent.", source: {path: data/experiments/EXPERIMENT-02-design-and-result.docx, author: Ana Fialho, dated: "2026-05-28", revised: "2026-07-21"}, metric_version: n/a, verbal: null, invalidated_by: "author statement of 2026-08-12 that a threshold was adjusted", validity: invalidated, reaffirmed_by: null}
+  - {id: F9, fact: EXPERIMENT-02 thresholds as registered on 2026-05-28, value: unknown, source: {path: none, author: unknown, dated: unknown, revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F10, fact: EXPERIMENT-02 result, value: "Median first response 72 minutes. Median self-service 36.9 per cent. Both criteria met.", source: {path: data/experiments/EXPERIMENT-02-design-and-result.docx, author: Ana Fialho, dated: "2026-05-28", revised: "2026-07-21"}, metric_version: unknown, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F11, fact: EXPERIMENT-02 per-account results, value: "Six rows. Median row empty. Recomputed by the harness from the six rows: 72 minutes and 36.9 per cent, which equals F10. The recomputation is not a source.", source: {path: data/experiments/EXPERIMENT-02-results.xlsx, author: Ana Fialho, dated: "2026-07-18", revised: unknown}, metric_version: unknown, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F12, fact: author statement on the experiment outcome, value: "It beat one measure and missed the other. It was adjusted.", source: {path: "docs/interviews/2026-08-12 Ana Fialho, how decisions happen.docx", author: Mei Tan, dated: "2026-08-12", revised: n/a}, metric_version: n/a, verbal: "Ana Fialho, 2026-08-12, transcribed", invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F13, fact: DECISION-0028, value: "Pilot extended from 12 to 28 accounts on 2026-08-07 as a scope change rather than a launch. Approver Ana Fialho. Evidence OPPORTUNITY-04 and verbal confirmation from engineering that capacity is available.", source: {path: data/decisions/DECISION-0028-pilot-scope-change.docx, author: Ana Fialho, dated: "2026-08-07", revised: unknown}, metric_version: n/a, verbal: "engineering capacity confirmation, person and date not recorded", invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F14, fact: POLICY-08, value: "Pilot expansion beyond 25 accounts requires a documented launch-readiness decision. Owner Ana Fialho.", source: {path: docs/Policies.docx, author: Ana Fialho, dated: unknown, revised: "2026-06-02"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F15, fact: POLICY-03, value: "Customer data leaving the EU region requires a documented transfer basis. Owner Tomas Silva.", source: {path: docs/Policies.docx, author: Ana Fialho, dated: unknown, revised: "2026-06-02"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F16, fact: POLICY-10 and POLICY-11, value: "POLICY-10 superseded by POLICY-11 on 2026-07-01. POLICY-11 owner Gabriela Rocha.", source: {path: docs/Policies.docx, author: Ana Fialho, dated: unknown, revised: "2026-06-02"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F17, fact: BLOCKER-01, value: "POLICY-03 sign-off for LATAM accounts. Opened 2026-07-11. Owner empty. Last touched 2026-08-22. Asked three times.", source: {path: data/product-tracker.xlsx, author: Ana Fialho, dated: unknown, revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F18, fact: support review capacity, value: "Six engineers. Support has not given a number for what the review queue can absorb.", source: {path: "docs/interviews/2026-08-19 Rui Bastos, what the pilot showed.docx and data/discovery/portal-expansion-design.docx", author: "Mei Tan, Ana Fialho with Kofi Adjei", dated: "2026-08-19 and 2026-07-09", revised: unknown}, metric_version: n/a, verbal: "Rui Bastos, 2026-08-19, transcribed", invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F19, fact: INCIDENT-01, value: "A superseded refund window reached a customer. Billing answer sent without a human reading it. Written 2026-07-14, three days after the fact. Nobody owns the follow-up.", source: {path: "docs/incidents/INCIDENT-01 superseded refund window.docx", author: unknown, dated: "2026-07-14", revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F20, fact: INCIDENT-02, value: "Retry advice stopped an Enterprise account's inbound feed. Sent without a human reading it. Written 2026-07-29. Occurrence date not stated.", source: {path: "docs/incidents/INCIDENT-02 retry advice stopped a feed.docx", author: unknown, dated: "2026-07-29", revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F21, fact: product view of the incidents, value: "Neither incident has a follow-up owner. Whether either incident should block expansion. Nobody has been asked to decide.", source: {path: "docs/incidents/Pilot incidents, product view.docx", author: Ana Fialho, dated: "2026-08-04", revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F22, fact: per-account enablement, value: "In the design, not built.", source: {path: data/launch/launch-readiness-checklist.xlsx, author: Ana Fialho, dated: unknown, revised: "2026-08-26"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F23, fact: readiness checklist state, value: "Rows 1, 2, 4, 6, 7, 8 Yes. Rows 3, 5, 9 No. Rows 1, 2, 8 have no evidence. Row 4 cites assist-expansion-design.docx, which does not exist in the repository. Row 6 checks POLICY-10.", source: {path: data/launch/launch-readiness-checklist.xlsx, author: Ana Fialho, dated: unknown, revised: "2026-08-26"}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F24, fact: measure support asked for, value: "Review load per engineer. Suggestions requiring human review, per engineer per week. Target Falling. Source Not measured.", source: {path: data/launch/adoption-measures-draft.xlsx, author: Ana Fialho, dated: unknown, revised: unknown}, metric_version: unknown, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F25, fact: decision deadline, value: "Decide by the end of August. Tracker note: Now overdue.", source: {path: data/discovery/stakeholder-requests/2026-08-13-ana-fialho.docx, author: Ana Fialho, dated: "2026-08-13", revised: n/a}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F26, fact: Nordkai result quoted for renewals, value: "112 minute median to 51", source: {path: data/discovery/stakeholder-requests/2026-08-05-gabriela-rocha.docx, author: Gabriela Rocha, dated: "2026-08-05", revised: n/a}, metric_version: unknown, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+  - {id: F27, fact: reporting line of the product lead, value: "Ana Fialho reports to Ines Duarte, Founder and CEO.", source: {path: data/people/headcount.xlsx, author: unknown, dated: unknown, revised: unknown}, metric_version: n/a, verbal: null, invalidated_by: null, validity: valid, reaffirmed_by: null}
+
+stakeholder_positions:            # written by context. Verbatim.
+  - {person: Rui Bastos, role: Support Manager, area: support review capacity, position: "Please do not widen the pilot until the share of suggestions needing human review is coming down. I am not against this. I am against doing it in that order.", dated: "2026-08-08", path: data/discovery/stakeholder-requests/2026-08-08-rui-bastos.docx}
+  - {person: Rui Bastos, role: Support Manager, area: support review capacity, position: "I object to expanding before the review queue is solved. That is not the same as objecting.", dated: "2026-08-19", path: "docs/interviews/2026-08-19 Rui Bastos, what the pilot showed.docx"}
+  - {person: Tomas Silva, role: Legal and Data Protection, area: POLICY-03 LATAM, position: "For the LATAM accounts in the proposed expansion I have not seen where the search runs or what data reaches it. Until I do I cannot sign off on those accounts. This is not a blanket objection. The EU and NA accounts are not affected.", dated: "2026-08-11", path: data/discovery/stakeholder-requests/2026-08-11-tomas-silva.docx}
+  - {person: Gabriela Rocha, role: Customer Success Director, area: renewals, position: "I am not asking to expand anything. I am asking to be allowed to quote what already happened.", dated: "2026-08-05", path: data/discovery/stakeholder-requests/2026-08-05-gabriela-rocha.docx}
+  - {person: Ana Fialho, role: VP Product, area: decision timing, position: "We need a decision on expansion before the end of August. If the answer is no, that is a decision too, and I would rather have it than continue.", dated: "2026-08-13", path: data/discovery/stakeholder-requests/2026-08-13-ana-fialho.docx}
+  - {person: Ana Fialho, role: VP Product, area: state of the brief, position: "No. I wrote it before the two incidents. It says the pilot is going well, which was true in June.", dated: "2026-08-12", path: "docs/interviews/2026-08-12 Ana Fialho, how decisions happen.docx"}
+  - {person: Kofi Adjei, role: "Engineering Manager, Integrations", area: engineering capacity and feasibility, position: not on record, dated: null, path: null}
+  - {person: Sofia Marques, role: Analytics Lead, area: metric sources and versions, position: not on record, dated: null, path: null}
+
+route_note:                       # written by route
+  type_proposed: feature
+  type_rationale: "An increment on something already released. The help portal runs on 12 accounts (F1) and the item widens it (F6). The parent has no item ID (links.parent unknown). Not a pilot: no new hypothesis and no time box are proposed. Not new-product: the product exists."
+  policies_triggered:
+    - {policy: POLICY-08, why: "28 accounts in DECISION-0028 (F13) and a target of 40 (F6) both exceed 25 (F14)", owner: Ana Fialho, enforced_by: nothing}
+    - {policy: POLICY-03, why: "LATAM accounts are in the proposed expansion (REQUEST-T01). The policy text says EU region. The mismatch is contradiction 6.", owner: Tomas Silva, enforced_by: nothing}
+    - {policy: POLICY-01, why: "billing answers to Business and Enterprise accounts are within the portal's scope. INCIDENT-01 (F19) was one. Applies to the release, not to G2.", owner: Rui Bastos, enforced_by: nothing}
+    - {policy: POLICY-11, why: "REQUEST-G01 asks to quote resolution times in renewals (F26). Checklist row 6 checks the superseded POLICY-10 (F16, F23).", owner: Gabriela Rocha, enforced_by: nothing}
+  deterministic_checks:
+    - {check: account count against POLICY-08 threshold, input: "28, from DECISION-0028 (F13). Threshold 25 (F14).", result: exceeds}
+    - {check: target account count against POLICY-08 threshold, input: "40, from the brief (F6). Threshold 25.", result: exceeds}
+    - {check: status of POLICY-10 on the checklist date, input: "checklist last updated 2026-08-26. POLICY-10 replaced 2026-07-01 (F16).", result: superseded on the citation date}
+    - {check: brief date against INCIDENT-01 written date, input: "2026-06-18 against 2026-07-14", result: brief is earlier. F2 to F5 invalidated.}
+    - {check: DECISION-0028 evidence date against incidents, input: "cites the brief of 2026-06-18. Incidents written 2026-07-14 and 2026-07-29. Decision dated 2026-08-07.", result: the decision cited evidence older than both incidents}
+    - {check: experiment document edit date against run end, input: "last edited 2026-07-21. Run ended 2026-07-15.", result: edited after the run}
+    - {check: currently enabled account count, input: "no document states it", result: cannot count}
+  signatories_g2:
+    - {person: Ana Fialho, role: VP Product, because: decider, product lead}
+    - {person: Rui Bastos, role: Support Manager, because: the outcome lands on the support team}
+    - {person: Tomas Silva, role: Legal and Data Protection, because: "POLICY-03, personal data of LATAM accounts"}
+    - {person: Kofi Adjei, role: "Engineering Manager, Integrations", because: feasibility. DECISION-0028 cited only a verbal confirmation.}
+  signatories_g3:
+    - {person: Ana Fialho, role: VP Product, because: "decider, POLICY-08 owner"}
+    - {person: Rui Bastos, role: Support Manager, because: "review capacity, POLICY-01 owner"}
+    - {person: Tomas Silva, role: Legal and Data Protection, because: "POLICY-03, per region"}
+    - {person: Kofi Adjei, role: "Engineering Manager, Integrations", because: "rollback plan, per-account enablement (F22)"}
+    - {person: Gabriela Rocha, role: Customer Success Director, because: "account managers briefed, POLICY-11 owner"}
+  waves_proposed:
+    - {n: 1, accounts: unknown, regions: [EU, NA], go_criteria: "G3 signed. POLICY-03 not required per REQUEST-T01."}
+    - {n: 2, accounts: unknown, regions: [LATAM], go_criteria: "POLICY-03 transfer basis documented and signed by Tomas Silva. Wave 1 criterion met."}
+    - {note: "The go criterion support asked for, share of suggestions requiring human review falling (F24), has source Not measured and cannot be a go criterion until it is measured."}
+
+experiment_registration:          # written by act. Not applicable to this item.
+  applies: false
+  note: "The experiment belongs to the parent pilot, which has no item. Its registration and result are in the manifest as F7 to F12 and in contradiction 1."
+
+decision_draft:                   # written by act. A draft is not a decision.
+  reference: null
+  decision: "Widen the help portal rollout from its current pilot scope toward a target of 40 Business and Enterprise accounts, released in regional waves, each wave subject to G3."
+  rationale: >
+    Account managers for further accounts have requested access (F13). The brief of 2026-06-18
+    recommended a readiness assessment for 40 accounts (F6). The brief's performance figures are
+    invalidated by INCIDENT-01 and are not relied on (F2 to F5). The experiment result reads as
+    met (F10, F11) and its author says one measure was missed and the threshold adjusted (F12);
+    the registered thresholds are unknown (F9). This draft therefore does not cite the experiment
+    as a clean pass. Support has objected to widening before review load falls (F18, positions).
+    Two incidents occurred in the pilot and have no follow-up owner (F19, F20, F21).
+  scope: "Up to 40 accounts in waves. Wave 1 EU and NA. Wave 2 LATAM after POLICY-03 sign-off. Account lists unknown."
+  out_of_scope: [unknown]
+  evidence: [F1, F6, F7, F10, F11, F12, F13, F14, F15, F18, F19, F20, F21, F22, F24]
+  constraints:
+    - "POLICY-08: any wave that takes the total beyond 25 accounts requires the G3 launch-readiness decision (F14)."
+    - "POLICY-03 open for LATAM (F15, F17). Wave 2 blocked until signed."
+    - "Per-account enablement not built (F22). Development stage required before Review."
+    - "Review capacity number not on record (F18)."
+    - "Neither incident has a follow-up owner (F21)."
+  review_date: unknown
+  type: feature
+
+verification:                     # written by verify. Checks copied from states/02-discovery/definition.yaml.
+  performed_on: "2026-09-24"
+  checks:
+    - {check: "Every fact in the manifest has a source path and a date, or the literal unknown.", looked_at: "F1 to F27", result: pass, note: "F9 is unknown by design. F27 source undated, marked unknown."}
+    - {check: "No fact dated before a linked incident is used without an invalidated_by entry and a reaffirmation signature.", looked_at: "F2 to F5, decision_draft.evidence", result: pass, note: "F2 to F5 are marked invalidated and the draft does not cite them. Reaffirmation would need Ana Fialho's signature."}
+    - {check: "Thresholds in the decision draft equal the thresholds in the experiment registration.", looked_at: "F8, F9, F12", result: cannot verify, note: "Registered thresholds unknown. The document shows values last edited 2026-07-21 and its author says one was adjusted. Counts as fail."}
+    - {check: "Every policy cited is current in docs/Policies.docx on the date of the check. Superseded policies are named with their successor.", looked_at: "route_note.policies_triggered, F16, F23", result: fail, note: "The evidence chain includes checklist row 6, which checks POLICY-10, superseded by POLICY-11 on 2026-07-01. The route note itself cites current policies."}
+    - {check: "Every signatory in the route note has a position on record or is listed as not on record.", looked_at: stakeholder_positions, result: pass, note: "Kofi Adjei and Sofia Marques listed as not on record."}
+    - {check: "The account count in the draft is compared with the POLICY-08 threshold of 25 by counting, and the input and result are written.", looked_at: route_note.deterministic_checks, result: pass, note: "Performed. 28 exceeds 25. 40 exceeds 25. POLICY-08 applies. Currently enabled count cannot be counted."}
+    - {check: "Every unknown that G2 depends on is listed in the gate pack.", looked_at: "unknowns, gate.pack.unknown", result: pass, note: ""}
+  outcome: failed
+
+gate:                             # pack and consents written by approve on 2026-09-24. signature null.
+  id: G2
+  question: Do we build this, as drafted?
+  options: [build, reject, more-discovery, defer]
+  deadline: "2026-08-31"
+  deadline_source: "REQUEST-A01, 2026-08-13"
+  decider: {role: product lead, person: Ana Fialho}
+  consents:
+    - {person: Rui Bastos, role: Support Manager, because: the outcome lands on the support team, response: "Please do not widen the pilot until the share of suggestions needing human review is coming down. I am not against this. I am against doing it in that order.", responded_on: "2026-08-08", state: objected}
+    - {person: Tomas Silva, role: Legal and Data Protection, because: "POLICY-03, LATAM accounts", response: "Until I do I cannot sign off on those accounts. This is not a blanket objection. The EU and NA accounts are not affected.", responded_on: "2026-08-11", state: objected}
+    - {person: Kofi Adjei, role: "Engineering Manager, Integrations", because: feasibility, response: not on record, responded_on: null, state: not-on-record}
+  pack:
+    summary: >
+      Whether to widen the help portal from its pilot scope toward 40 accounts, in regional waves.
+      Verification failed on two checks: the registered experiment thresholds cannot be recovered,
+      and a superseded policy sits in the evidence chain. The option build is not available until
+      those are corrected. Two of three consents are objections in writing. The third is not on
+      record. The G2 deadline of 2026-08-31 has passed.
+    known: [F1, F6, F7, F10, F11, F12, F13, F14, F15, F17, F18, F19, F20, F21, F22, F23, F24, F25]
+    unknown: [registered thresholds F9, G1 signature, whether 28 accounts are enabled, account list and regions, Nordkai baseline source, INCIDENT-02 date, review capacity number, engineering estimate in writing, escalation target, parent item ID, review date, who ticked checklist row 2]
+    contradictions: [1 experiment outcome, 2 pilot figures, 6 scope of POLICY-03, 8 who must agree]
+    recommendation: null
+  missing_for_more_discovery:
+    - the EXPERIMENT-02 thresholds as registered, or a re-registration signed by Ana Fialho
+    - a review capacity number from support, in writing
+    - an engineering estimate and feasibility statement, in writing
+    - the list of the additional accounts with regions
+    - a review date for the decision
+    - an escalation target for a pending consent
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}

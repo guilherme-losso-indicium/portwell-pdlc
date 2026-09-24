@@ -1,0 +1,99 @@
+# lifecycle/01-backlog/OPPORTUNITY-04.yaml
+# Created retroactively on 2026-09-24 by the worked case. The item predates the harness.
+# Every value below comes from a document in portwell-product. Nothing was estimated.
+
+item: OPPORTUNITY-04
+type: feature                     # hypothesis by route. Not confirmed, G2 unsigned.
+stage: 01-backlog
+status: open                      # G1 has no signature on record, so this artifact cannot be exited
+status_since: "2026-06-18"
+owner: {role: product lead, person: Ana Fialho}
+entered: "2026-06-18"             # data/product-tracker.xlsx, Opened. Same date as the brief.
+entered_from: null
+exited: null
+exited_to: null
+links:
+  parent: unknown                 # the help portal pilot has no item ID in the tracker
+  spawned_by: null
+  supersedes: null
+  superseded_by: null
+refs: [EXPERIMENT-02, DECISION-0028, REQUEST-G01, REQUEST-R01, REQUEST-T01, REQUEST-A01, BLOCKER-01, LAUNCH-01, ADOPT-01]
+
+sources:
+  - {path: data/discovery/OPPORTUNITY-04-expand-the-portal-pilot.docx, author: Ana Fialho, dated: "2026-06-18", revised: "2026-06-18", note: the brief. Status Open.}
+  - {path: data/product-tracker.xlsx, author: Ana Fialho, dated: unknown, revised: unknown, note: "row OPPORTUNITY-04, Opened 2026-06-18, Last touched 2026-08-13"}
+  - {path: docs/interviews/2026-08-12 Ana Fialho, how decisions happen.docx, author: Mei Tan, dated: "2026-08-12", revised: n/a, note: origin of the opportunity}
+  - {path: data/discovery/stakeholder-requests/2026-08-05-gabriela-rocha.docx, author: Gabriela Rocha, dated: "2026-08-05", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-08-rui-bastos.docx, author: Rui Bastos, dated: "2026-08-08", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-11-tomas-silva.docx, author: Tomas Silva, dated: "2026-08-11", revised: n/a}
+  - {path: data/discovery/stakeholder-requests/2026-08-13-ana-fialho.docx, author: Ana Fialho, dated: "2026-08-13", revised: n/a}
+
+unknowns:
+  - {fact: date the opportunity was first raised, needed_for: opportunity.origin.when, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: G1 signature, needed_for: gate G1, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: what is out of scope, needed_for: opportunity.out_of_scope, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: item ID of the parent pilot, needed_for: links.parent, asked_to: Ana Fialho, asked_on: "2026-09-24"}
+  - {fact: review_by date of the brief, needed_for: opportunity.review_by, asked_to: null, asked_on: null}
+
+contradictions: []
+
+controls_missing:
+  - {check: an item cannot have a discovery artifact without a signed G1, would_protect: the record of who decided an opportunity was worth investigating}
+  - {check: every brief carries a review_by date, would_protect: detection of a stale brief before it is cited as evidence}
+
+status_log:
+  - n: 1
+    status: open
+    since: "2026-06-18"
+    until: null
+    reason: "registered retroactively on 2026-09-24 from the brief and the tracker row. No G1 record exists. Entered without gate record."
+    waiting_on: Ana Fialho
+    owner: Ana Fialho
+    asks: ["2026-09-24"]
+    limit: 3
+    escalate_to: not named
+    return_to: 01-backlog open
+
+opportunity:                      # written by intake
+  title: Expand the help portal rollout
+  problem: >
+    "Expanding to 40 accounts would cover most of the Business and Enterprise base before the
+    autumn renewal cycle." Brief, 2026-06-18.
+  origin:
+    who: Gabriela Rocha
+    when: unknown
+    channel: stakeholder request   # Ana Fialho, 2026-08-12: "With Gabriela, really. She had two renewals coming up and wanted something to show."
+  requester: {person: Gabriela Rocha, role: Customer Success Director}
+  scope_hypothesis: "Target of 40 accounts, Business and Enterprise, before the October renewal cycle. Brief, section Why now."
+  out_of_scope: []                # the brief lists none. Recorded under unknowns.
+  deadline: {date: "2026-08-31", source: "2026-08-13-ana-fialho.docx: decide by the end of August"}
+  review_by: unknown
+  type_hypothesis: feature        # written by route. An increment on a pilot already released to 12 accounts.
+  attached_requests:              # written by context
+    - {id: REQUEST-G01, from: Gabriela Rocha, received: "2026-08-05", asks: "Quote the pilot numbers in three Enterprise renewals. Not asking to expand anything.", path: data/discovery/stakeholder-requests/2026-08-05-gabriela-rocha.docx}
+    - {id: REQUEST-R01, from: Rui Bastos, received: "2026-08-08", asks: "Do not widen the pilot until the share of suggestions needing human review is coming down.", path: data/discovery/stakeholder-requests/2026-08-08-rui-bastos.docx}
+    - {id: REQUEST-T01, from: Tomas Silva, received: "2026-08-11", asks: "LATAM accounts need a documented transfer basis first. EU and NA not affected.", path: data/discovery/stakeholder-requests/2026-08-11-tomas-silva.docx}
+    - {id: REQUEST-A01, from: Ana Fialho, received: "2026-08-13", asks: "Decide on expansion before the end of August.", path: data/discovery/stakeholder-requests/2026-08-13-ana-fialho.docx}
+
+gate:                             # pack written by approve on 2026-09-24. signature left null.
+  id: G1
+  question: Is this worth discovering?
+  options: [investigate, reject, park]
+  deadline: null
+  deadline_source: "G1 has no deadline"
+  decider: {role: product lead, person: Ana Fialho}
+  consents: []
+  pack:
+    summary: >
+      Gabriela Rocha asked, at a date not on record, to widen the help portal pilot for the
+      autumn renewals. Ana Fialho wrote the brief on 2026-06-18 recommending a launch readiness
+      assessment for 40 accounts. The item has been treated as in discovery since then. No record
+      says anyone decided to investigate it.
+    known: [the brief exists and is unrevised, four written requests are attached, the tracker lists the item as Open]
+    unknown: [origin date, out of scope, parent pilot ID, review_by]
+    contradictions: []
+    recommendation: null
+  discovery_deadline: null        # the de facto G2 deadline of 2026-08-31 comes from REQUEST-A01, not from G1
+  revisit_date: null
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}

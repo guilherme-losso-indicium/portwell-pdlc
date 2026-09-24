@@ -1,0 +1,47 @@
+stage: 01-backlog
+name: Opportunity backlog
+common_stage: intake
+purpose: Accept a request as an item and bound it before anyone spends discovery effort on it.
+borrowed: false
+
+entry_conditions:
+  - A request exists with an identifiable origin: who asked, when, through which channel.
+  - The requester can be named.
+
+required_evidence:
+  - Opportunity record with problem, origin, requester, scope hypothesis, out of scope, deadline with its source, type hypothesis.
+  - Every related request attached by ID, date received and path.
+  - A review_by date.
+
+exit_conditions:
+  - G1 signed with outcome investigate, and a discovery deadline set by the decider.
+  - Outcome park keeps the item here with a revisit date.
+
+owner: {role: product lead, person: Ana Fialho}
+
+allowed_transitions:
+  - {to: 02-discovery, when: G1 outcome investigate}
+  - {to: terminal, status: rejected, when: G1 outcome reject}
+  - {to: 01-backlog, status: open, when: G1 outcome park, note: revisit_date required}
+
+failure_paths:
+  - condition: Origin or requester cannot be identified.
+    action: Record them as unknown. Do not register a substitute. The item stays open with the unknown listed and the pack says so.
+  - condition: Revisit date of a parked item passed.
+    action: Status blocked, reason awaiting triage, waiting_on the decider.
+
+skills_sequence: [intake, context, route, approve, handoff]
+
+verify_checks: []
+
+gate:
+  id: G1
+  question: Is this worth discovering?
+  options: [investigate, reject, park]
+  decider: {role: product lead, person: Ana Fialho}
+  consents_rule: None. The requester is informed of the outcome.
+  deadline_rule: G1 has no deadline. G1 sets the deadline for G2.
+
+why_this_state: >
+  Trace step 1. The expansion began as a conversation between Gabriela Rocha and Ana Fialho with
+  no date and no record. Nothing bounded it before the brief was written on 2026-06-18.

@@ -1,0 +1,37 @@
+# lifecycle/03-ready-for-development/<ITEM-ID>.yaml
+# Borrowed stage. Product records, engineering owns.
+
+item: ""
+type: ""
+stage: 03-ready-for-development
+status: open
+status_since: ""
+owner: {role: engineering manager, person: Kofi Adjei}
+entered: ""
+entered_from: 02-discovery
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []                          # the DECISION reference at least
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  decision_ref: ""
+  g2_signed_on: ""
+  scope_items: []                 # copied from the DECISION scope, one line each
+
+engineering_acceptance:           # written by handoff from what engineering provides. Nothing here is estimated by a skill.
+  received_on: null
+  estimate:
+    effort: ""
+    basis: ""
+    written_by: ""
+    dated: null
+    verbal: null                  # "who, date" if only spoken. Verbal does not satisfy exit.
+  capacity: {team: "", available_from: null}
+  open_questions: []
+  accepted: {person: null, role: null, statement: null, date: null}

@@ -1,11 +1,10 @@
 # Complete this file before writing the lifecycle skills.
-group: TODO
-track: TODO # SDLC, DDLC, KDLC, or PDLC
-context_repository: TODO # Local path to the assigned Portwell track repository
-process: TODO
-work_item: TODO
+group: Luis Fortunato, Bruna Goulart, Tabi Thuler, Guilherme Losso
+track: PDLC
+context_repository: ../portwell-product-main # relative to this repository. Read-only.
+process: A product decision is made
+work_item: OPPORTUNITY-04 # Expand the help portal pilot rollout
 
 constraints:
   track_repository_access: read-only
   heldout_course_material: prohibited
-

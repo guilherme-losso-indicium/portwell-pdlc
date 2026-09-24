@@ -1,0 +1,41 @@
+stage: 06-release
+name: Release
+common_stage: handoff
+purpose: Enable one wave as G3 decided, record exactly what was enabled and for whom, and hand the item to monitoring.
+borrowed: false
+
+entry_conditions:
+  - G3 signed with outcome release and a wave plan.
+  - The wave being enabled has every consent it requires in state consented.
+
+required_evidence:
+  - Release log entry for the wave. Enabled on, accounts, regions, enabled by, communications sent, rollback tested on or unknown, confirmed on and by.
+
+exit_conditions:
+  - The wave is enabled and confirmed by engineering.
+
+owner: {role: product lead, person: Ana Fialho, note: engineering enables, product records}
+
+allowed_transitions:
+  - {to: 07-monitoring, when: wave confirmed}
+  - {to: 06-release, status: blocked, when: a consent for this wave is pending, note: other waves are not blocked}
+  - {to: 06-release, status: correction-required, when: enabling failed, return_to 04-in-development}
+
+failure_paths:
+  - condition: Enabling fails or the rollback is triggered.
+    action: Record it in the release log. Status correction-required, return_to 04-in-development.
+  - condition: The enabled scope differs from the G3 wave.
+    action: Record the difference. verify fails. The wave is not confirmed.
+
+skills_sequence: [intake, act, verify, handoff]
+
+verify_checks:
+  - Enabled accounts and regions equal the G3 wave.
+  - Every consent the wave requires is in state consented.
+  - Communications to account managers have a date and a sender.
+
+gate: null
+
+why_this_state: >
+  Trace step 11 and 19. DECISION-0028 extended the pilot to 28 accounts. Whether those accounts
+  are enabled today is not recorded anywhere in the repository.

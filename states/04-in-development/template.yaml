@@ -1,0 +1,32 @@
+# lifecycle/04-in-development/<ITEM-ID>.yaml
+# Borrowed stage. The build lives in the SDLC track. This artifact references it.
+
+item: ""
+type: ""
+stage: 04-in-development
+status: open
+status_since: ""
+owner: {role: engineering manager, person: Kofi Adjei}
+entered: ""
+entered_from: 03-ready-for-development
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  decision_ref: ""
+  accepted_on: ""
+
+build_record:                     # written by verify from what engineering reports
+  scope_items:
+    - {item: "", status: not-built, note: ""}      # built | partial | not-built
+  deviations:
+    - {what: "", why: "", needs_g2: false, raised_by: "", dated: null}
+  sdlc_refs: []                   # identifiers only. Never copied.
+  declared_ready: {person: null, role: null, date: null}

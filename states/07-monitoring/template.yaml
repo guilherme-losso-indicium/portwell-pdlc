@@ -1,0 +1,80 @@
+# lifecycle/07-monitoring/<ITEM-ID>.yaml
+
+item: ""
+type: ""
+stage: 07-monitoring
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: 06-release
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  wave: 1
+  enabled_on: ""
+  criteria_ref: ""                # experiment_registration or DECISION review criteria, as frozen before release
+  review_date: null
+
+active_scope:                     # written by context
+  accounts: []
+  regions: []
+  since: null
+
+measures:                         # written by observe. A measure without a source does not count.
+  - name: ""
+    definition: ""
+    target: ""
+    source: ""                    # system or document. unknown allowed, then counted: false
+    metric_version: unknown
+    value: null
+    as_of: null
+    counted: null
+
+wave_criteria:                    # written by observe. Only where a wave plan exists.
+  - {wave: 2, criterion: "", status: "", as_of: null}
+
+incidents:                        # written by observe. Linked, never copied.
+  - id: ""
+    path: ""
+    written: null
+    occurred: unknown
+    effect_on_item: ""
+    invalidates: []               # manifest IDs in this item and in linked items
+    disposition: null             # correct | escalate | new-item. Chosen and signed by the owner.
+    linked_item: null
+    owner: ""
+
+triggers:                         # written by observe
+  - {type: "", fired_on: null, action: ""}      # incident | review_date | evidence_invalidated
+
+gate:
+  id: G4
+  question: Did it do what the criteria said, and what happens now?
+  options: [done, iterate, retire]
+  deadline: null
+  deadline_source: ""
+  decider: {role: product lead, person: Ana Fialho}
+  verdict:                        # written by verify. Results against criteria as frozen. No interpretation.
+    criteria_ref: ""
+    results:
+      - {criterion: "", registered_threshold: "", observed: "", met: null, source: ""}
+  consents:
+    - {person: "", role: "", because: "", response: "", responded_on: null, state: pending}
+  pack:
+    summary: ""
+    known: []
+    unknown: []
+    contradictions: []
+    recommendation: null
+  spawned_item: null              # for outcome iterate
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}

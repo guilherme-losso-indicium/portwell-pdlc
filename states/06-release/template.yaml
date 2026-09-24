@@ -1,0 +1,37 @@
+# lifecycle/06-release/<ITEM-ID>.yaml
+# One artifact per item. One release_log entry per wave. The item returns here from monitoring for the next wave.
+
+item: ""
+type: ""
+stage: 06-release
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: 05-review
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  g3_signed_on: ""
+  release_type: ""
+  wave_plan_ref: 05-review gate.waves
+
+release_log:                      # written by act from what engineering reports. verify checks it against the G3 wave.
+  - wave: 1
+    enabled_on: null
+    accounts: []
+    regions: []
+    enabled_by: {person: "", role: ""}
+    communications:
+      - {to: "", sent_on: null, by: "", evidence: ""}
+    rollback_tested_on: unknown
+    matches_g3_wave: null
+    confirmed: {person: null, role: null, date: null}

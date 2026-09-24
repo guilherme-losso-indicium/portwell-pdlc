@@ -1,0 +1,79 @@
+# lifecycle/05-review/<ITEM-ID>.yaml
+
+item: ""
+type: ""
+stage: 05-review
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: 04-in-development
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  decision_ref: ""
+  declared_ready_on: ""
+  incidents_since_g2: []          # IDs, written dates
+
+readiness_checklist:              # written by act from the row owners' evidence. A yes without a link is recorded as yes-without-evidence.
+  - n: 1
+    item: ""
+    owner: ""
+    status: ""                    # yes | no | waived | yes-without-evidence
+    evidence: {path: null, dated: null}
+    dated: null
+
+rollback_plan:                    # written by context
+  path: null
+  path_exists: null
+  owner: ""
+  dated: null
+  tested_on: unknown
+
+policy_check:                     # written by route
+  - {policy: "", cited_by: "", current: null, superseded_by: null, applies: null, owner: ""}
+
+verification_v2:                  # written by verify
+  performed_on: null
+  checks:
+    - {check: "", looked_at: "", result: "", note: ""}
+  outcome: null
+
+waivers:                          # written only by the person accepting the risk
+  - {row: null, risk: "", accepted_by: null, role: null, statement: null, date: null}
+
+gate:
+  id: G3
+  question: What do we release, to whom, in which waves?
+  options: [release, hold, reject-release]
+  deadline: null
+  deadline_source: ""
+  decider: {role: product lead, person: Ana Fialho, because: POLICY-08 owner}
+  release_type: ""                # pilot | general
+  account_count:
+    requested: null
+    currently_enabled: unknown
+    source: ""
+  policy_08:
+    threshold: 25
+    triggered: null               # by counting. Input and result in verification_v2.
+  waves:
+    - {n: 1, accounts: [], regions: [], go_criteria: "", consents_required: []}
+  consents:
+    - {person: "", role: "", because: "", response: "", responded_on: null, state: pending}
+  pack:
+    summary: ""
+    known: []
+    unknown: []
+    contradictions: []
+    recommendation: null
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}
