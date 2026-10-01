@@ -1,0 +1,99 @@
+# lifecycle/02-discovery/<ITEM-ID>.yaml
+# Header per states/schema.yaml. Sections marked with the skill that writes them.
+
+item: ""
+type: ""                          # as proposed in route_note until G2 confirms
+stage: 02-discovery
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: 01-backlog
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+entry_ticket:                     # written by intake
+  g1_signed_on: ""
+  g2_deadline: null
+  g2_deadline_source: ""
+  scope_from_g1: ""
+
+evidence_manifest:                # written by context. One entry per fact used anywhere below.
+  - id: F1
+    fact: ""
+    value: ""
+    source: {path: "", author: "", dated: "", revised: ""}
+    metric_version: unknown       # for numbers
+    verbal: null                  # "who, date" when the fact was only said
+    invalidated_by: null          # event and date, e.g. "INCIDENT-01, written 2026-07-14"
+    validity: valid               # valid | invalidated | reaffirmed
+    reaffirmed_by: null           # person and date, only a person writes it
+
+stakeholder_positions:            # written by context. Verbatim, or "not on record".
+  - {person: "", role: "", area: "", position: "", dated: "", path: ""}
+
+route_note:                       # written by route
+  type_proposed: ""
+  type_rationale: ""
+  policies_triggered:
+    - {policy: "", why: "", owner: "", enforced_by: nothing}
+  deterministic_checks:           # Article 4. Input and result, no interpretation.
+    - {check: "", input: "", result: ""}
+  signatories_g2: []              # person, role, because
+  signatories_g3: []
+  waves_proposed: []              # n, accounts, regions, go_criteria
+
+experiment_registration:          # written by act. Only for poc and pilot. Frozen once a person signs frozen_by.
+  applies: false
+  question: ""
+  method: ""
+  accounts: []
+  period: {start: null, end: null}
+  thresholds:
+    - {measure: "", operator: "", value: "", unit: ""}
+  frozen: false
+  frozen_on: null
+  frozen_by: null                 # person
+
+decision_draft:                   # written by act. DECISION record form. A draft is not a decision.
+  reference: null                 # DECISION-xxxx, issued by the product repository
+  decision: ""
+  rationale: ""
+  scope: ""
+  out_of_scope: []
+  evidence: []                    # manifest IDs
+  constraints: []
+  review_date: null
+  type: ""
+
+verification:                     # written by verify. Every check from definition.yaml, pass or fail.
+  performed_on: null
+  checks:
+    - {check: "", looked_at: "", result: "", note: ""}
+  outcome: null                   # passed | failed
+
+gate:                             # pack written by approve. consents recorded verbatim. signature only by a person.
+  id: G2
+  question: Do we build this, as drafted?
+  options: [build, reject, more-discovery, defer]
+  deadline: null
+  deadline_source: ""
+  decider: {role: product lead, person: Ana Fialho}
+  consents:
+    - {person: "", role: "", because: "", response: "", responded_on: null, state: pending}
+  pack:
+    summary: ""
+    known: []
+    unknown: []
+    contradictions: []
+    recommendation: null
+  missing_for_more_discovery: []
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}

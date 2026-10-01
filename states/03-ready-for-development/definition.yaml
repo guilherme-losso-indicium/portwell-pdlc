@@ -1,0 +1,41 @@
+stage: 03-ready-for-development
+name: Ready for development
+common_stage: handoff
+purpose: Hand a published decision to engineering and record that engineering accepted it, with a written estimate.
+borrowed: true
+borrowed_from: Engineering. Product waits here and records the dependency. It does not run the work.
+
+entry_conditions:
+  - G2 signed with outcome build.
+  - The DECISION record has a reference issued by the product repository.
+
+required_evidence:
+  - Engineering acceptance with a written estimate, its basis, who wrote it and when, capacity and start date, open questions.
+  - A named engineering owner.
+
+exit_conditions:
+  - Engineering accepted in writing.
+
+owner: {role: engineering manager, person: Kofi Adjei}
+
+allowed_transitions:
+  - {to: 04-in-development, when: acceptance recorded}
+  - {to: 03-ready-for-development, status: blocked, when: no capacity or no written estimate, waiting_on engineering}
+
+failure_paths:
+  - condition: The estimate is only verbal.
+    action: Record it as verbal with who and when. It does not satisfy the exit condition. Status blocked, waiting_on engineering.
+  - condition: Engineering raises a question that changes the scope.
+    action: Status correction-required, return_to 02-discovery, G2 reopened.
+
+skills_sequence: [intake, handoff]
+
+verify_checks:
+  - The DECISION reference exists and matches the G2 signature.
+  - The estimate has an author and a date.
+
+gate: null
+
+why_this_state: >
+  Trace step 11 and docs/Dependencies.docx. DECISION-0028 cited "Verbal confirmation from
+  engineering that capacity is available." Engineering estimates arrive "verbally."

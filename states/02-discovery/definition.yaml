@@ -1,0 +1,67 @@
+stage: 02-discovery
+name: Discovery
+common_stage: context
+note_on_common_stages: context is dominant. route, act, verify and approve also run here.
+purpose: Assemble the evidence a product decision needs, with source, date and validity, and bring it to G2 by a deadline.
+borrowed: false
+
+entry_conditions:
+  - G1 signed with outcome investigate.
+  - A discovery deadline for G2 exists, with its source.
+
+required_evidence:
+  - Evidence manifest. Every fact with source path, author, dated, revised, metric version where it is a number, verbal flag where it was only said, and the event that invalidates it.
+  - Stakeholder positions from support, legal and engineering, verbatim and dated, or recorded as not on record.
+  - Contradictions and unknowns, each contradiction with both versions, none resolved by a skill.
+  - Route note. Type proposed, policies triggered with their owners, deterministic checks with input and result, signatories for G2 and G3, wave proposal.
+  - Experiment registration when the type is poc or pilot, frozen before any release.
+  - Decision draft in DECISION record form.
+  - Verification report with every check and its result.
+
+exit_conditions:
+  - Verification outcome passed.
+  - G2 signed with outcome build.
+
+owner: {role: product lead, person: Ana Fialho}
+
+allowed_transitions:
+  - {to: 03-ready-for-development, when: G2 outcome build}
+  - {to: terminal, status: rejected, when: G2 outcome reject}
+  - {to: 02-discovery, status: open, when: G2 outcome more-discovery, note: missing_for_more_discovery lists what is needed}
+  - {to: 02-discovery, status: blocked, when: G2 outcome defer, or a consent pending, or the deadline passed}
+
+failure_paths:
+  - condition: An essential fact has no source.
+    action: Stop. Status correction-required with return_to 02-discovery. Ask the owner for the source. Record the fact under unknowns.
+  - condition: Two sources contradict a fact G2 depends on.
+    action: Stop. Record both under contradictions with depends G2. G2 cannot be signed until a person resolves it by signature.
+  - condition: The G2 deadline passed with signature null.
+    action: Status blocked, reason awaiting decision, waiting_on the decider, owner the decider.
+  - condition: A consent is pending after three asks.
+    action: Status escalated. escalate_to is not named in the current process. Record that.
+
+skills_sequence: [intake, context, route, act, verify, approve, handoff]
+
+verify_checks:
+  - Every fact in the manifest has a source path and a date, or the literal unknown.
+  - No fact dated before a linked incident is used without an invalidated_by entry and a reaffirmation signature.
+  - Thresholds in the decision draft equal the thresholds in the experiment registration.
+  - Every policy cited is current in docs/Policies.docx on the date of the check. Superseded policies are named with their successor.
+  - Every signatory in the route note has a position on record or is listed as not on record.
+  - The account count in the draft is compared with the POLICY-08 threshold of 25 by counting, and the input and result are written.
+  - Every unknown that G2 depends on is listed in the gate pack.
+
+gate:
+  id: G2
+  question: Do we build this, as drafted?
+  options: [build, reject, more-discovery, defer]
+  decider: {role: product lead, person: Ana Fialho}
+  consents_rule: >
+    Support where the outcome lands on the support team. Legal where personal data is processed.
+    The owner of every policy the route note triggers. Engineering attests feasibility.
+  deadline_rule: Set at G1 or by a request on record. Passing it moves the item to blocked with reason awaiting decision.
+
+why_this_state: >
+  Trace steps 3, 4, 7, 8, 14 and 15. The brief of 2026-06-18 was never revised, the EXPERIMENT-02
+  threshold moved after the result and the original is not recorded, and the decision deadline of
+  end of August passed with nobody owning the wait.

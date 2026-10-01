@@ -1,0 +1,64 @@
+stage: 05-review
+name: Review
+common_stage: verify
+purpose: Prove the item is ready to release. Every readiness row has evidence, every policy cited is current, the evidence is still valid, and G3 decides the release.
+borrowed: false
+
+entry_conditions:
+  - Build declared ready in 04-in-development.
+
+required_evidence:
+  - Readiness checklist. Each row with owner, status yes, no or waived, an evidence link for every yes, and a date.
+  - Rollback plan with a path that exists, an owner and a test date or unknown.
+  - Policy check. Each policy cited, whether it is current, its successor if superseded, whether it applies.
+  - Verification v2. Evidence age against incidents since G2, thresholds against registration, links present.
+  - Waivers, each signed by the person accepting the risk.
+
+exit_conditions:
+  - No row reads yes without an evidence link.
+  - No row reads no without a signed waiver.
+  - Verification v2 outcome passed.
+  - G3 signed.
+
+owner: {role: product lead, person: Ana Fialho, note: row owners are accountable for their rows}
+
+allowed_transitions:
+  - {to: 06-release, when: G3 signed with a wave plan}
+  - {to: 05-review, status: correction-required, when: a row fails, return_to 04-in-development or 02-discovery}
+  - {to: 05-review, status: blocked, when: a regional or area consent is pending}
+
+failure_paths:
+  - condition: A row reads yes with no evidence link.
+    action: verify marks it failed. The row is not ready. The row owner is asked for the link.
+  - condition: A cited policy is superseded.
+    action: verify names the successor. The row is re-checked against it.
+  - condition: A fact the item cites is dated before an incident linked since G2.
+    action: Status correction-required, return_to 02-discovery, the fact marked invalidated.
+  - condition: A consent for one region is pending.
+    action: Only that wave is blocked at G3. Other waves may proceed.
+
+skills_sequence: [intake, context, route, act, verify, approve, handoff]
+
+verify_checks:
+  - Every row with status yes has an evidence link that resolves to a document with a date.
+  - Every row with status no has a signed waiver or blocks G3.
+  - Every policy in policy_check is current in docs/Policies.docx on the date of the check.
+  - No manifest fact cited by the checklist is invalidated.
+  - The requested account count is compared with 25 by counting. Input and result written.
+  - The rollback plan path exists.
+
+gate:
+  id: G3
+  question: What do we release, to whom, in which waves?
+  options: [release, hold, reject-release]
+  decider: {role: product lead, person: Ana Fialho, because: POLICY-08 owner}
+  consents_rule: >
+    Support for review capacity. Legal per region where personal data is processed. Engineering
+    for rollback and enablement. Customer success for account manager communication and POLICY-11.
+    The owner of every policy the route note triggers.
+  deadline_rule: Set by the decider at signature of G2 review_date, or by a request on record.
+
+why_this_state: >
+  Trace step 18. The checklist of 2026-08-26 had rows 1, 2 and 8 at Yes with no evidence, row 4
+  citing a file that does not exist, row 6 checking POLICY-10 after it was superseded on
+  2026-07-01, and row 7 calling an adjusted threshold pre-registered.

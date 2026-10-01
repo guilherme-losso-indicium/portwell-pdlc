@@ -1,0 +1,115 @@
+# Statuses are tags on an artifact, never folders. An item keeps its stage while its status changes.
+# Each status has the same six fields as a stage, plus where it is allowed.
+# Every change of status is one appended line in the artifact's status_log.
+
+statuses:
+  open:
+    meaning: Work in progress inside the stage.
+    allowed_in: all stages
+    entry_conditions: [the stage's entry conditions hold]
+    required_evidence: [the artifact exists, instantiated from the stage template]
+    exit_conditions: [any other status]
+    owner: the stage owner
+    allowed_transitions: [blocked, escalated, correction-required, exited, rejected, retired]
+    failure_path: see the stage definition
+
+  exited:
+    meaning: The stage's gate or exit condition was met and the next artifact was created.
+    allowed_in: all stages except 08-done
+    entry_conditions: [gate signed where the stage has a gate, exit conditions met otherwise]
+    required_evidence: [exited and exited_to filled, next stage artifact exists with entered_from pointing back]
+    exit_conditions: [none. exited is final for this artifact unless a correction reopens it]
+    owner: the stage owner
+    allowed_transitions: [open, only through correction-required with return_to this stage]
+    failure_path: none
+
+  blocked:
+    meaning: The item waits for an input from outside the stage, or a gate deadline passed without a signature.
+    allowed_in: all stages while open
+    entry_conditions:
+      - a named person or team is waited on, or
+      - the gate deadline passed with signature null
+    required_evidence:
+      - status_log line with reason, waiting_on, owner, asks with dates, limit, escalate_to, return_to
+    exit_conditions:
+      - the input arrives, recorded verbatim with date, and status returns to open
+      - or asks reach the limit and status becomes escalated
+    owner: whoever asked for the input. For a passed deadline, the decider.
+    allowed_transitions: [open, escalated]
+    failure_path: three asks without response moves the item to escalated
+    limit: 3
+    why: >
+      BLOCKER-01, opened 2026-07-11, "Asked three times", owner field empty, still three asks on
+      2026-08-22. docs/How we work today.docx: "Ask again. There is no defined next step."
+
+  escalated:
+    meaning: A blocked episode reached its limit, or a classification at G2 or G3 is disputed.
+    allowed_in: all stages while open
+    entry_conditions: [blocked at limit, or a signed dispute of the route note's classification]
+    required_evidence:
+      - status_log line with escalate_to named
+      - the escalation target's decision, verbatim, dated, signed
+    exit_conditions: [the escalation target signs a decision]
+    owner: the escalation target. Not named in the current process.
+    allowed_transitions: [open, rejected, retired]
+    failure_path: >
+      No escalation target exists. The item stays escalated and the artifact records under
+      unknowns that the process has no one to escalate to. Ana Fialho, 2026-08-12: "the person I
+      would escalate to is the person waiting."
+
+  correction-required:
+    meaning: Something the stage relied on failed or was invalidated, and work must return to an earlier point.
+    allowed_in: all stages while open, and 07-monitoring for released items
+    entry_conditions:
+      - a verify check failed, or
+      - a linked incident is dated after evidence the item cites, or
+      - a fact in the manifest was invalidated, or
+      - a gate verdict the item depends on is contested, or
+      - development deviated from the DECISION scope
+    required_evidence:
+      - status_log line with reason, return_to stage, and the failing check or incident ID
+      - when the return_to stage is earlier, that stage's artifact reopened with its own log line
+      - when a new control is needed, a new item in 01-backlog with links.spawned_by set
+    exit_conditions: [the correction is verified and status returns to open in the return_to stage]
+    owner: the item owner
+    allowed_transitions: [open]
+    failure_path: a correction above the owner's authority moves the item to escalated
+    why: >
+      INCIDENT-01 and INCIDENT-02 were closed "without a control being added" and the brief for
+      OPPORTUNITY-04 "was written before both. It has not been revised."
+
+  rejected:
+    meaning: A person decided no.
+    allowed_in: [01-backlog, 02-discovery, and any stage from escalated]
+    entry_conditions: [G1 or G2 signed with outcome reject, or the escalation target signs reject]
+    required_evidence: [the gate signature, the reason verbatim, what would reopen the item]
+    exit_conditions: [terminal]
+    owner: the person who signed
+    allowed_transitions: []
+    failure_path: none
+    why: >
+      Ana Fialho, 2026-08-13: "If the answer is no, that is a decision too, and I would rather
+      have it than continue."
+
+  retired:
+    meaning: The item was withdrawn, superseded, or its monitoring was closed by G4.
+    allowed_in: [07-monitoring, 08-done, and any stage when a successor supersedes it]
+    entry_conditions: [G4 signed with outcome retire, or links.superseded_by set by a successor's G2, or a deprecation executed]
+    required_evidence: [the signature or the successor's ID, the date, what was withdrawn]
+    exit_conditions: [terminal]
+    owner: the product lead
+    allowed_transitions: []
+    failure_path: none
+    why: DECISION-0031 retires the legacy cycle count module with effect 2027-01-31.
+
+precedence:
+  note: >
+    An artifact can carry more than one open episode in status_log. The header status shows the
+    most severe open episode, in this order. Added during the worked case of 2026-09-24, when
+    OPPORTUNITY-04 carried an escalated episode, a blocked episode and a correction at once.
+  order: [escalated, blocked, correction-required, open]
+
+parked:
+  note: >
+    Not a status. A G1 outcome of park keeps the item in 01-backlog with status open and a
+    revisit date. A revisit date that passes moves the item to blocked with reason awaiting triage.

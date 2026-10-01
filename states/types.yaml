@@ -1,0 +1,80 @@
+# Item types and what each gate requires of them.
+# A skill never decides the type. route proposes it from the evidence and a person confirms it at G2.
+# Same eight stages for every type. The type changes what a gate needs, not where the item goes.
+
+types:
+  poc:
+    purpose: Answer a feasibility question before anything is built for customers.
+    stages_used: [01-backlog, 02-discovery]
+    g2_requires: [question, answer_criterion, time_box, technical_owner]
+    g3_requires: not-applicable
+    monitoring_measures: not-applicable
+    g4_produces: not-applicable
+    closes_as: >
+      The verdict is recorded in the discovery artifact of the parent item. The poc item itself
+      exits as retired, with links.parent set.
+    portwell_example: >
+      Where the search runs and what data reaches it for the LATAM accounts. Tomas Silva,
+      2026-08-11: "I have not seen where the search runs or what data reaches it."
+
+  pilot:
+    purpose: Learn in production with a limited, time-boxed scope and criteria frozen before release.
+    stages_used: all
+    g2_requires: [hypothesis, success_criteria_frozen, account_list, end_date, monitoring_plan]
+    g3_requires: [wave_1_scope, rollback_plan, consents_by_region, experiment_registration_signed_before_release]
+    monitoring_measures: The registered criteria, per account, plus linked incidents.
+    g4_produces: >
+      A verdict, met or not met, against the thresholds as registered. Done spawns the follow-on
+      opportunity with links.spawned_by set to this item's G4.
+    portwell_example: >
+      The help portal on 12 accounts. EXPERIMENT-02 was its monitoring. The thresholds visible in
+      EXPERIMENT-02-design-and-result.docx are the adjusted ones; the registered values are unknown.
+
+  mvp:
+    purpose: The smallest version that stays, for a first set of real users.
+    stages_used: all
+    g2_requires: [explicit_out_of_scope, measure_that_justifies_continuing, first_user_set]
+    g3_requires: [waves, policy_08_count, rollback_plan, consents_by_effect]
+    monitoring_measures: The agreed adoption measures, each with source and metric version.
+    g4_produces: Keep, iterate through a linked item, or retire.
+    portwell_example: >
+      Per-account enablement and a configurable threshold per product area, proposed in
+      portal-expansion-design.docx and "In the design, not built" per the readiness checklist.
+
+  feature:
+    purpose: An increment on something already in monitoring.
+    stages_used: all
+    g2_requires: [parent_item, parent_monitoring_consumed, scope_delta]
+    g3_requires: [waves, policy_08_count, rollback_plan, consents_by_effect]
+    monitoring_measures: Updates the parent item's measures.
+    g4_produces: Keep, iterate, or retire. The parent may be superseded.
+    portwell_example: >
+      OPPORTUNITY-04, expansion of the pilot to 40 accounts. Its parent is the pilot, which has no
+      ID in data/product-tracker.xlsx.
+
+  new-product:
+    purpose: Something with no parent in monitoring.
+    stages_used: all
+    g2_requires: [problem, first_user_set, explicit_out_of_scope, measure_that_justifies_continuing, dependencies_written]
+    g3_requires: [waves, policy_08_count, rollback_plan, consents_by_effect, launch_readiness_decision]
+    monitoring_measures: The agreed adoption measures, with source and metric version.
+    g4_produces: Keep, iterate, or retire.
+    portwell_example: none in the repository.
+
+  deprecation:
+    purpose: Withdraw something with notice.
+    stages_used: all
+    g2_requires: [cost_evidence, ticket_volume_by_module, accounts_affected, contractual_variations]
+    g3_requires: [notice_date, migration_support, consents_by_effect]
+    monitoring_measures: Migration progress per account, with a review date.
+    g4_produces: The withdrawn module goes to retired. Done closes the migration.
+    portwell_example: >
+      DECISION-0031, legacy cycle count module, effect 2027-01-31, four accounts, review at
+      2026-11-01.
+
+signatory_rule: >
+  For every type, the decider is the product lead. Consents are derived, not chosen: the owner of
+  every policy the route note triggers, support where the outcome lands on the support team,
+  legal where personal data is processed, engineering for feasibility at G2 and for rollback at G3.
+  Policy owners as of docs/Policies.docx last reviewed 2026-06-02: POLICY-01 Rui Bastos, POLICY-03
+  Tomas Silva, POLICY-08 Ana Fialho, POLICY-11 Gabriela Rocha.

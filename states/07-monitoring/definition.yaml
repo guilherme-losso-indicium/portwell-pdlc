@@ -1,0 +1,58 @@
+stage: 07-monitoring
+name: Monitoring
+common_stage: observe
+purpose: Watch what the release did, against criteria fixed before it, and decide at G4 whether it is done, needs another pass, or should be withdrawn.
+borrowed: false
+
+entry_conditions:
+  - A wave is enabled and confirmed in 06-release.
+
+required_evidence:
+  - Active scope. Accounts and regions enabled, since when.
+  - Measures. Each with definition, target, source, metric version, value and as-of date. A measure without a source does not count.
+  - Wave criteria status for the next wave, where a wave plan exists.
+  - Linked incidents. ID, path, written date, occurred date or unknown, effect on this item, which facts it invalidates, disposition.
+  - Triggers fired. Incident, review date, evidence invalidated, with the action taken.
+
+exit_conditions:
+  - G4 signed with outcome done or retire.
+  - Or the next wave's go criteria are met, and the item returns to 06-release for that wave.
+
+owner: {role: product lead, person: Ana Fialho, note: Analytics provides measures. Sofia Marques is Analytics Lead per headcount.xlsx}
+
+allowed_transitions:
+  - {to: 06-release, when: next wave go criteria met and consents for that wave consented}
+  - {to: 07-monitoring, status: correction-required, when: an incident is linked or a cited fact is invalidated}
+  - {to: 08-done, when: G4 outcome done}
+  - {to: terminal, status: retired, when: G4 outcome retire}
+  - {to: 01-backlog, note: G4 outcome iterate creates a new item with links.spawned_by set. This item stays in monitoring or goes to done as G4 says.}
+
+failure_paths:
+  - condition: A linked incident is written.
+    action: Status correction-required on this item. Every fact dated before the incident in every linked item is marked invalidated. Disposition chosen by the owner and signed, correct, escalate or new item.
+  - condition: A measure has no source.
+    action: It is recorded with source unknown and does not count toward any criterion. controls_missing names it.
+  - condition: The review date passed without G4.
+    action: Status blocked, reason awaiting review, waiting_on the decider.
+
+skills_sequence: [intake, context, observe, verify, approve, handoff, recover]
+
+verify_checks:
+  - Every measure used in a criterion has a source and a metric version, or is marked not counted.
+  - Every linked incident has a disposition or an open status_log line.
+  - Criteria compared are the ones registered before release, not later edits.
+
+gate:
+  id: G4
+  question: Did it do what the criteria said, and what happens now?
+  options: [done, iterate, retire]
+  decider: {role: product lead, person: Ana Fialho}
+  consents_rule: >
+    Support for the effect on the support team. Analytics attests the source and version of each
+    measure. The owner of every policy the route note triggers.
+  deadline_rule: The review_date set in the DECISION record, or the experiment end date for a pilot.
+
+why_this_state: >
+  Trace steps 6, 9, 16 and 17. Two incidents were closed with no follow-up owner. The measure
+  support asked for has "Not measured" as its source. Whether the incidents should block the
+  expansion was a question "Nobody has been asked to decide."

@@ -1,0 +1,34 @@
+stage: 08-done
+name: Done
+common_stage: terminal
+purpose: Close the item with its verdict on record. Done means the criteria were met and the review is closed. It does not mean released.
+borrowed: false
+
+entry_conditions:
+  - G4 signed with outcome done.
+
+required_evidence:
+  - Closure. Reference to G4, verdict summary, items spawned, what remains monitored and by which item, closed on and by.
+
+exit_conditions:
+  - None. Terminal. Reopening is a new linked item.
+
+owner: {role: product lead, person: Ana Fialho}
+
+allowed_transitions: []
+
+failure_paths:
+  - condition: Something remains monitored with no item owning it.
+    action: The closure is not complete. The remaining measure is assigned to a linked item or the item stays in monitoring.
+
+skills_sequence: [intake, handoff]
+
+verify_checks:
+  - G4 outcome is done and signed.
+  - Every remaining measure names an owning item.
+
+gate: null
+
+why_this_state: >
+  Trace step 16. Rui Bastos, 2026-08-19: "a suggestion that needs a human to read it before it
+  goes out has not saved anyone anything, it has moved the work." Released is not done.

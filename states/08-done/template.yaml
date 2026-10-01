@@ -1,0 +1,28 @@
+# lifecycle/08-done/<ITEM-ID>.yaml
+
+item: ""
+type: ""
+stage: 08-done
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: 07-monitoring
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+closure:                          # written by handoff
+  g4_ref: 07-monitoring gate
+  g4_signed_on: null
+  verdict_summary: ""
+  spawned_items: []               # IDs with links.spawned_by pointing to this item's G4
+  remaining_monitoring:
+    - {what: "", owned_by_item: ""}
+  closed: {person: null, role: null, date: null}

@@ -1,0 +1,94 @@
+# Common header for every artifact under lifecycle/.
+# Every stage template starts with these keys, in this order, before its own sections.
+# Values marked "skill" are written by skills. The signature block is written only by a person.
+
+header:
+  item: string            # Stable ID issued by the product repository, e.g. OPPORTUNITY-04. Never renumbered.
+  type: enum              # poc | pilot | mvp | feature | new-product | deprecation. See types.yaml.
+  stage: enum             # 01-backlog | 02-discovery | 03-ready-for-development | 04-in-development | 05-review | 06-release | 07-monitoring | 08-done
+  status: enum            # open | blocked | escalated | correction-required | exited | rejected | retired. See statuses.yaml.
+  status_since: date      # ISO date of the current status.
+  owner:                  # Who is accountable while the item sits in this stage.
+    role: string
+    person: string        # As named in data/people/headcount.xlsx.
+  entered: date
+  entered_from: string    # Previous stage, or null for 01-backlog.
+  exited: date            # null while open.
+  exited_to: string       # Next stage, or "terminal", or null.
+  links:
+    parent: string        # Item this one derives from, or null. unknown is allowed when the parent has no ID.
+    spawned_by: string    # Gate or incident that created this item, or null.
+    supersedes: string    # Item this one replaces, or null.
+    superseded_by: string # Filled when this item is retired by a successor.
+  refs: list              # IDs owned by the product repository that this artifact cites: DECISION-0028, EXPERIMENT-02, REQUEST-R01.
+
+sources:                  # What this artifact read. Mandatory. Article 1.
+  - path: string          # Path inside the track repository, or inside this repository.
+    author: string        # Or unknown.
+    dated: date           # The date the document states, or unknown.
+    revised: date         # Last revised, or never, or unknown.
+    note: string          # Optional. What was taken from it.
+
+unknowns:                 # Facts the stage needs and nobody recorded. Article 2.
+  - fact: string
+    needed_for: string    # Which section or gate depends on it.
+    asked_to: string      # Person, or null.
+    asked_on: date
+
+contradictions:           # Two sources that disagree. Never resolved by a skill. Article 2.
+  - fact: string
+    a: {source: string, says: string}
+    b: {source: string, says: string}
+    depends: string       # Which gate depends on this fact, or none.
+    resolved_by: null     # Person and date, written only by a person.
+
+controls_missing:         # Checks done by hand that a later module makes executable. Article 8.
+  - check: string
+    would_protect: string
+
+status_log:               # Append-only. One line per status change. Article 6 and 7.
+  - n: integer
+    status: enum
+    since: date
+    until: date           # null while current.
+    reason: string
+    waiting_on: string    # Person or team, or null.
+    owner: string         # Who is responsible for resolving this episode.
+    asks: list            # Dates of each ask, for blocked.
+    limit: integer        # 3 for blocked.
+    escalate_to: string   # Named person, or "not named".
+    return_to: string     # Stage and status the item returns to when resolved.
+
+gate:                     # Present only in stages that end with a gate: 01, 02, 05, 07.
+  id: enum                # G1 | G2 | G3 | G4
+  question: string
+  options: list
+  deadline: date          # Or null. Set by the previous gate or by a request on record.
+  deadline_source: string
+  decider: {role: string, person: string}
+  consents:               # Derived by route: policy owners, whoever absorbs the effect.
+    - person: string
+      role: string
+      because: string     # Policy ID or effect.
+      response: string    # Verbatim, or "not on record".
+      responded_on: date
+      state: enum         # consented | objected | pending | not-on-record
+  pack:                   # Prepared by approve. What the decider sees.
+    summary: string
+    known: list
+    unknown: list
+    contradictions: list
+    recommendation: null  # A skill does not recommend an outcome. Article 3.
+  outcome: enum           # null until signed.
+  signature:              # Written only by a person. A skill leaves every field null.
+    person: null
+    role: null
+    statement: null       # Verbatim.
+    date: null
+
+conventions:
+  unknown_literal: unknown
+  verbal_flag: "verbal: who, date"
+  dates: ISO 8601, YYYY-MM-DD
+  item_id: as issued by the product repository
+  file_name: lifecycle/<stage>/<ITEM-ID>.yaml

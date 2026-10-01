@@ -1,0 +1,44 @@
+stage: 04-in-development
+name: In development
+common_stage: act
+purpose: Record what engineering built against the DECISION scope, and catch deviations before review.
+borrowed: true
+borrowed_from: Engineering. The build itself lives in the SDLC track. This artifact references it.
+
+entry_conditions:
+  - Engineering acceptance recorded in 03-ready-for-development.
+
+required_evidence:
+  - Build record. Each scope item of the DECISION marked built, partial or not built.
+  - Deviations from scope, each with why and whether it needs G2 again.
+  - References to the SDLC track, by identifier only.
+  - Declared ready for review, by whom and when.
+
+exit_conditions:
+  - Engineering declared the build ready for review.
+  - No deviation marked needs_g2 remains open.
+
+owner: {role: engineering manager, person: Kofi Adjei}
+
+allowed_transitions:
+  - {to: 05-review, when: declared ready and no open deviation needs G2}
+  - {to: 04-in-development, status: correction-required, when: a deviation needs G2, return_to 02-discovery}
+  - {to: 04-in-development, status: blocked, when: a dependency outside engineering is missing}
+
+failure_paths:
+  - condition: A deviation changes scope without a new decision.
+    action: Status correction-required, return_to 02-discovery. G2 is reopened for the deviation only.
+  - condition: A scope item is silently dropped.
+    action: verify marks it not built. The build is not ready for review.
+
+skills_sequence: [intake, verify, handoff]
+
+verify_checks:
+  - Every scope item of the DECISION appears in the build record with a status.
+  - Every deviation has a why and a needs_g2 value.
+
+gate: null
+
+why_this_state: >
+  Trace step 18, checklist row 5: "Per-account enablement implemented, No, In the design, not
+  built." The pilot was extended to 28 accounts on 2026-08-07 with the enabling mechanism not built.

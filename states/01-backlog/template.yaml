@@ -1,0 +1,55 @@
+# lifecycle/01-backlog/<ITEM-ID>.yaml
+# Header per states/schema.yaml. Sections marked with the skill that writes them.
+
+item: ""
+type: ""                          # hypothesis only until G2 confirms it
+stage: 01-backlog
+status: open
+status_since: ""
+owner: {role: product lead, person: Ana Fialho}
+entered: ""
+entered_from: null
+exited: null
+exited_to: null
+links: {parent: null, spawned_by: null, supersedes: null, superseded_by: null}
+refs: []
+sources: []
+unknowns: []
+contradictions: []
+controls_missing: []
+status_log: []
+
+opportunity:                      # written by intake
+  title: ""
+  problem: ""
+  origin:
+    who: ""
+    when: ""                      # ISO date or unknown
+    channel: ""                   # customer conversation | support | roadmap | stakeholder request
+  requester: {person: "", role: ""}
+  scope_hypothesis: ""
+  out_of_scope: []
+  deadline: {date: null, source: ""}
+  review_by: null
+  type_hypothesis: ""             # written by route. Confirmed only at G2.
+  attached_requests:              # written by context
+    - {id: "", from: "", received: "", asks: "", path: ""}
+
+gate:                             # pack written by approve. signature written only by a person.
+  id: G1
+  question: Is this worth discovering?
+  options: [investigate, reject, park]
+  deadline: null
+  deadline_source: ""
+  decider: {role: product lead, person: Ana Fialho}
+  consents: []
+  pack:
+    summary: ""
+    known: []
+    unknown: []
+    contradictions: []
+    recommendation: null          # a skill does not recommend an outcome
+  discovery_deadline: null        # set by the decider at signature. Becomes the G2 deadline.
+  revisit_date: null              # only for outcome park
+  outcome: null
+  signature: {person: null, role: null, statement: null, date: null}
