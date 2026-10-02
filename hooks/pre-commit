@@ -1,0 +1,5 @@
+#!/bin/sh
+# Harness-independent copy of the gate guard. Install: ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
+files=$(git diff --cached --name-only --diff-filter=ACM | grep '^lifecycle/.*\.yaml$')
+[ -z "$files" ] && exit 0
+exec python3 "$(git rev-parse --show-toplevel)/lib/validate_gate.py" $files
