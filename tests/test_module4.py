@@ -120,6 +120,13 @@ class Runner(unittest.TestCase):
             for name in ("evals", "tests", ".git", ".github"):
                 self.assertFalse((repo / name).exists(), name)
 
+    def test_smoke_check_is_an_allowlist(self):
+        seen = "Edit\nGlob\nRead\nWrite\nCronCreate\nRemoteTrigger\n\nThe last two are deferred."
+        problems = runner.smoke_problems({"result": seen})
+        self.assertTrue(problems and "CronCreate" in problems[0] and "Glob" in problems[0], problems)
+        self.assertEqual(runner.smoke_problems({"result": "Read\nEdit\nWrite"}), [])
+        self.assertTrue(runner.smoke_problems({"result": "I can use some tools."}))
+
     def test_thresholds(self):
         rates = {"a": {"rate": 2 / 3, "trials": 3, "kind": "normal"},
                  "b": {"rate": 2 / 3, "trials": 3, "kind": "adversarial"},
@@ -132,6 +139,7 @@ class Runner(unittest.TestCase):
         for flag in ("--strict-mcp-config", "--no-session-persistence"):
             self.assertIn(flag, flags)
         self.assertEqual(flags[flags.index("--allowedTools") + 1], "Read,Edit,Write")
+        self.assertEqual(flags[flags.index("--tools") + 1], "Read,Edit,Write")
         self.assertIn("Bash", flags[flags.index("--disallowedTools") + 1])
         self.assertEqual(flags[flags.index("--setting-sources") + 1], "project")
 

@@ -41,8 +41,9 @@ NOT_COPIED = (".git", "evals", "tests", "controls", "verification", "reports", "
               "__pycache__", ".DS_Store", "*.pdf")
 PREAMBLE = ("This is a non-interactive run in a repository. Work under CLAUDE.md. If you need a "
             "person to decide or answer, say who and why, and stop.\n\n")
+ALLOWED_TOOLS = ("Read", "Edit", "Write")
 SESSION_FLAGS = ["--output-format", "json", "--strict-mcp-config", "--setting-sources", "project",
-                 "--allowedTools", "Read,Edit,Write",
+                 "--tools", ",".join(ALLOWED_TOOLS), "--allowedTools", ",".join(ALLOWED_TOOLS),
                  "--disallowedTools", "Bash,WebFetch,WebSearch,Agent,Task,NotebookEdit",
                  "--permission-mode", "dontAsk", "--no-session-persistence"]
 
@@ -211,12 +212,28 @@ def smoke(budget_usd):
         shutil.rmtree(base, ignore_errors=True)
     text = str(response.get("result", ""))
     print(scrub(text, base))
-    leaks = [name for name in ("Bash", "mcp__", "WebFetch", "WebSearch") if name in text]
-    if response.get("is_error") or leaks:
-        print(f"SMOKE FAILED: is_error={response.get('is_error')} visible={leaks}", file=sys.stderr)
+    problems = smoke_problems(response)
+    if problems:
+        print("SMOKE FAILED: " + "; ".join(problems), file=sys.stderr)
         return 2
-    print(f"SMOKE OK: no Bash, web or MCP tool visible. cost_usd={response.get('total_cost_usd')}")
+    print(f"SMOKE OK: only {', '.join(ALLOWED_TOOLS)} visible. cost_usd={response.get('total_cost_usd')}")
     return 0
+
+
+def smoke_problems(response):
+    """Allowlist, not blocklist: any visible tool other than Read, Edit and Write fails the smoke test."""
+    if response.get("is_error"):
+        return [f"session error: {response.get('subtype')}"]
+    names = {line.strip().strip("-*` ").split()[0] for line in str(response.get("result", "")).splitlines()
+             if line.strip() and line.strip().strip("-*` ")[:1].isupper() and " " not in line.strip().strip("-*` ")}
+    extra = sorted(names - set(ALLOWED_TOOLS))
+    missing = sorted(set(ALLOWED_TOOLS) - names)
+    problems = []
+    if extra:
+        problems.append(f"tools visible beyond the allowlist: {', '.join(extra)}")
+    if missing:
+        problems.append(f"allowed tools not visible, so the answer cannot be trusted: {', '.join(missing)}")
+    return problems
 
 
 def live(sets, trials, budget_usd, only):
